@@ -5,9 +5,8 @@ A. Mohsin, N. K. Janjua, S. M. S. Islam and M. A. Babar, "SAM-SoS: A Stochastic 
 
 Formal modeling with Hybrid Stochastic Representations
 
-This repository contains some inital versions of Formally founded Hybrid stochastic formalism for modeling SoS Architectures
+This repository contains some initial versions of Formally founded Hybrid stochastic formalism for modeling SoS Architectures.
 
-The syntax and semantics are based on process algebras whihc are embedded into EBNF. Extneded syntax and semantics are inspeired by exisitng formal modeling descriptions for Software Architecture Modleing
+The syntax and semantics are based on process algebras, which are embedded in EBNF using Model-Driven Engineering. Extended syntax and semantics are inspired by existing formal modeling descriptions for Software Architecture Modeling.
 
-A model dirven approach is used based Eclipse Modeling Framework using tools like Xtext and Xtend based on JAVA
-
+A model-driven approach is used based on the Eclipse Modeling Framework (EMF) using tools like Xtext and Xtend based on JAVA.
