@@ -1,0 +1,294 @@
+grammar org.xtext.sosModeling.archModeling.SFDSL with org.eclipse.xtext.common.Terminals
+
+generate hSFDSL "http://www.xtext.org/SoSModeling/ArchModeling/HSFDSL"
+
+StochasticModeling:
+	StochasticModelElements+=ModelElementsDecaration
+	
+;
+
+ModelElementsDecaration: {ModelElementsDecaration}
+	(AbstractArchModel+=AbsArchDecl)*
+	(ConstiuenetSystemSDesign+=CSDecl)*
+	(MediatorDesign+=MedDecl)*
+	(ConcurrentConstraints+=CConsDecl)*
+	(ArchitecutreElementsBehaviors+=AElementsBehaviorRoutines)*
+	'ModelElements' name= QualifiedName
+	Interfce+=publicinterfaeceDef
+	(ArchTraits+=traitDeclaration)*
+		// Terminal Rules Architecture Coalition Constraints related to Performance, Reliability and Security 
+;
+// CSDESIGN DEFINTION 
+CSDecl:  // later add  parameters list at decleation time, considering rates of actions and concurrent constraints
+'Constituient-System' name= ID 	'{'
+(CSDesignConsists+=CSMembersDefintion) '}'
+//('[protocol' '{' assertions+=AssertionDecl+ '}')? // shall decide to inculde in CS behavior Defintion or not
+;
+CSMembersDefintion:	 
+	(Ports+=ProtDeclaration)
+	(AActions+=AElementsBehaviorRoutines) 
+	 (CSConConstraints+=CConsDecl)?
+	 (CSCoreBehavior+=StochsticBehaviors)*       // added for must have behaviros 
+	 	;
+	 	StochsticBehaviors:
+	 		// Actual behavior of CS when written HSF- DSL at instance 
+	 		// Behavior is made of {     
+// A required service to constituent system -->  void Received (Type data) {
+// and then privoided services  --> sent (): Both are embeeded into  AElementsBehaviorRoutines
+	 		'CSbehaviorsis'
+	 		'functinoalaity' type=types name= ID paramsDecl=formalParameters ('[' ']')* '{'
+	 		functions+= AElementsBehaviorRoutines
+	 		'}'
+	 	;
+	portandRoleType: 
+	'provides' | 'requires'
+;
+//provides:
+	//name=ID
+//;
+//requires:
+	//name=ID
+//;
+publicinterfaeceDef:
+	 // interface signatures 
+	 'PublicInteface' Name=ID'{'
+	 //'functionality' Name= ID
+	paramsDecl=formalParameters ('[' ']')* ';' 
+; 
+formalParameters: 
+{formalParameters} '(' paramsDecl+=formalParameterList? ')' 
+; 
+formalParameterList : 
+paramDecl=formalParameter ',' paramsDecl+=formalParameter* 
+; 
+formalParameter : 
+type=types name=variableDeclaratorId 
+; 
+variableDeclaratorId : 
+name=ID ('[' ']')* 
+	 '}'
+;
+
+ProtDeclaration:{ProtDeclaration}
+	porttype=portandRoleType 'port'
+	PubliicIntractionpointare=[publicinterfaeceDef] name = ID
+;
+
+QualifiedName:
+	ID('.'ID*)
+	;
+	
+AElementsBehaviorRoutines: {AElementsBehaviorRoutines}
+	CollaborativeActions+=CColActions+
+CaolitionBinding+=attachCSs
+ RemoveElements+=detachCSs
+ ConnectElenents+=BindElements 
+ControlDecisions+=ControlDecisions 
+ ActionReates+=ExponentialRates   // Rate of Actions
+ //localevents+=AElocalevents    // local events for processing IoTs / CPS nodes or any CSs actions: Actions not shared with other CSs
+ AddElements+=AddAElements 
+ HSFtypes=Expression  
+//|TransitionProbabilties+= ActionsProb / probablistic values could be assoicated with each action for CSs. 
+;
+CColActions:   // CollaborativeActions
+'Collaborate' name= ID
+	type+=types  paramsDecl+=formalParameters ('[' ']')* '{' 
+methodBody+=functinality+ 
+'}' 
+; 
+functinality:  // functions to send / recieve and other operations between CS
+ {functinality} functions+=(AElementsBehaviorRoutines)*
+Actions=[functinality]'.' target=[ExponentialRates] // Actions with exponential Rates
+//Actions=[AElementsBehaviorRoutines]'.' target=[ExponentialRates] // Actions with exponential Rates
+
+; 
+
+ 
+AddAElements: {AddAElements} 
+'instance' name=ID '=' 'new' type=ID '()' ';' 
+; 
+attachCSs : 
+ 'attach' '(' attachParam1+=Expression ',' attachParam2+=Expression ')' ';' 
+; 
+detachCSs : 
+{detachCSs} 'detach' '(' detachParam1+=Expression ',' detachParam2+=Expression ')' ';' 
+; 
+BindElements : 
+{BindElements} 'bind' '(' bindParam1+=Expression ',' bindParam2+=Expression ')' ';' 
+; 
+ControlDecisions : {ControlDecisions} 
+ 'Decide' '{' 
+('if'  expressionDecl=AElementsBehaviorRoutines '=>')? 
+statementDecl1+=AElementsBehaviorRoutines+ '}' 
+( 'or' '{' 
+('else' => expressionOrDecl+=AElementsBehaviorRoutines '=>')? 
+statementDecl2+=AElementsBehaviorRoutines+ '}' )* 
+'end;' 
+('iterate' '{'
+	=> expressionOrDecl+=AElementsBehaviorRoutines '=>'
+)?
+statementDecl2+=AElementsBehaviorRoutines+ '}'
+; 
+
+ExponentialRates: 
+{ExponentialRates} 'TRate' delayValue=INT'.'INT ';' // Rate of Action
+ |ExponentialRates=Expression 
+; 
+//AElocalevents: {AElocalevents}
+ //'getdata' //used for CSs local data processing i.e. internal actions
+//| {AElocalevents} 'readdata'  //
+//| {AElocalevents} (Name=ID)?
+//; 
+// writedata once read from local evnerionoments and store it for future communictation with other 	CSs. 
+
+CConsDecl:   {CConsDecl}               // These set of Rules are for Concurrent Constraints with Random Rates
+	 'StochasticCconstraints' name= ID '{'
+	 Askconstraints+=Askopeator
+	 | Tellconstraints+=Telloperator
+	 //('Tell' '('ConstraintShareDate+=types '.' rate+=ExponentialRates ')')*
+	//|  ('Ask' '('ConstraintData+=types '.' rate+=ExponentialRates ')')*
+'}';
+
+Telloperator:
+	 {Telloperator} ('Tell' '('ConstraintShareDate=types '.' rate=[ExponentialRates] ')')
+;
+Askopeator:
+	{Askopeator} ('Ask' '('ConstraintData=types '.' rate=[ExponentialRates] ')')
+	;
+
+//Datatoinfer:
+	//{Askfordata} 
+//;
+
+//sharedata:
+	//{TellData}
+//;
+//traits 
+traitDeclaration: 
+'trait' name=ID '{' 
+(ports+=ProtDeclaration) 
+(roles+=MedRoleDeclaration) 
+'}' 
+; 
+
+MedDecl:
+	'Mediator' name=ID  '{'     // The mediators defintion and constraints
+	MedRoles+=MedRoleDeclaration
+	AActions+=AElementsBehaviorRoutines
+	CSConConstraints+=CConsDecl
+	(MedCoreBehavior+=StochsticBehaviors)* 
+	'}'
+	;
+		
+MedRoleDeclaration:
+	MediationRoles+=DefineMediationRoles 'Med_Role'
+		;
+	DefineMediationRoles:
+		{DefineMediationRoles} type=portandRoleType
+		PubliicIntractionpointare+=[publicinterfaeceDef] name = ID
+	;
+AbsArchDecl: // This is Stocahstic Abstract Architecture for SoS with CSs, connectors/mediators, compositional behaviors and constratins 
+	'SoS_Arch_Caoliton' name =ID '{'
+	'SoS has AEs' '{'
+	Mediators+=MedDecl
+	Constitients+=CSDecl '}'
+	
+	AbstractCoaltion+=AElementsBehaviorRoutines
+	GlobalProps+=GlobalProperties
+	;
+//AssertionDecl:
+	//;
+	
+	// These are the properties at SoS global architecture level for a particular configuration / coalition 
+GlobalProperties:
+	'{'
+	'SoS-Properties'
+		 //'Property_Name' name=ID
+	 PropertyType=types name=ID '='
+	attrinit=(initVals)
+	'}' 
+;
+
+
+	
+
+types: 
+	
+'stirng'
+|'int' 
+|'float' 
+| 'boolean'
+| 'type' 
+| 'void'
+;
+initVals: 
+	  {initVals} STRING 
+	 |   {initVals} INT 
+	 | FLOAT 
+	 | {initVals} Boolean
+;
+Boolean:
+'true' | 'false';
+FLOAT:
+	value=INT '.' INT;
+	
+	// logical expressions termail rules adopted from the existing grammars consulted from PiADL and classic process algbriac rules for expressions. 
+Expression:
+	LogicalExpression 
+; 
+LogicalExpression returns Expression: 
+EqualityExpression 
+({LogicalExpression.left=current} op=('||' | '&&') 
+right=EqualityExpression)* 
+; 
+EqualityExpression returns Expression: 
+RelationalExpression 
+({EqualityExpression.left=current} op=('==' | '!=') 
+right=RelationalExpression)* 
+; 
+RelationalExpression returns Expression: 
+ArithmeticExpression 
+({RelationalExpression.left=current} op=('>=' | '<=' | '>' | '<') 
+right=ArithmeticExpression)* 
+; 
+ArithmeticExpression returns Expression: 
+Term 
+(({SumOperation.left=current} op='+' | {MinusOperation.left=current} op='-') 
+right=Term)* 
+; 
+Term returns Expression: 
+Factor 
+({Term.left=current} op=('*' | '/' | 'mod') right=Factor)* 
+; 
+Factor returns Expression: 
+'(' Expression ')' | 
+UnaryExpression | 
+AtomicElement 
+; 
+UnaryExpression returns Expression: 
+{NegationExpression} => '!' expression=AtomicElement 
+; 
+AtomicElement returns Expression: 
+LiteralElement | {VariableRef} variable=ID 
+//| {CallRef} calledElement=ID ('.'next+=ID)* ( '(' ( ('.')? nextArg+=ID)* ')' ) 
+; 
+LiteralElement returns Expression: 
+IntegerLiteral | RealLiteral | StringLiteral | BooleanLiteral 
+; 
+IntegerLiteral returns Expression: 
+
+{IntegerLiteral} value=INT 
+; 
+RealLiteral returns Expression: 
+{RealLiteral} value=FLOAT 
+;
+StringLiteral returns Expression: 
+{StringLiteral} value=STRING 
+; 
+BooleanLiteral returns Expression: 
+{BooleanLiteral} value=('true' | 'false') 
+; 
+//terminal REAL: 
+// INT '.' INT 
+//; 
+	

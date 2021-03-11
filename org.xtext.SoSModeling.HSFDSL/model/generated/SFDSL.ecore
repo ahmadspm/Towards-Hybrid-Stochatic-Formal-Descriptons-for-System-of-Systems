@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="hSFDSL" nsURI="http://www.xtext.org/SoSModeling/ArchModeling/HSFDSL"
+    nsPrefix="hSFDSL">
+  <eClassifiers xsi:type="ecore:EClass" name="StochasticModeling">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="StochasticModelElements"
+        upperBound="-1" eType="#//ModelElementsDecaration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelElementsDecaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="AbstractArchModel" upperBound="-1"
+        eType="#//AbsArchDecl" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ConstiuenetSystemSDesign"
+        upperBound="-1" eType="#//CSDecl" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="MediatorDesign" upperBound="-1"
+        eType="#//MedDecl" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ConcurrentConstraints"
+        upperBound="-1" eType="#//CConsDecl" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ArchitecutreElementsBehaviors"
+        upperBound="-1" eType="#//AElementsBehaviorRoutines" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Interfce" upperBound="-1"
+        eType="#//publicinterfaeceDef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ArchTraits" upperBound="-1"
+        eType="#//traitDeclaration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CSDecl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CSDesignConsists" upperBound="-1"
+        eType="#//CSMembersDefintion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CSMembersDefintion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Ports" upperBound="-1"
+        eType="#//ProtDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="AActions" upperBound="-1"
+        eType="#//AElementsBehaviorRoutines" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CSConConstraints" upperBound="-1"
+        eType="#//CConsDecl" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CSCoreBehavior" upperBound="-1"
+        eType="#//StochsticBehaviors" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StochsticBehaviors">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramsDecl" eType="#//formalParameters"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
+        eType="#//AElementsBehaviorRoutines" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="publicinterfaeceDef">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramsDecl" eType="#//formalParameters"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="formalParameters">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramsDecl" upperBound="-1"
+        eType="#//formalParameterList" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="formalParameterList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramDecl" eType="#//formalParameter"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramsDecl" upperBound="-1"
+        eType="#//formalParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="formalParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="name" eType="#//variableDeclaratorId"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="variableDeclaratorId">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProtDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="porttype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="PubliicIntractionpointare"
+        eType="#//publicinterfaeceDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AElementsBehaviorRoutines">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CollaborativeActions" upperBound="-1"
+        eType="#//CColActions" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CaolitionBinding" upperBound="-1"
+        eType="#//attachCSs" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="RemoveElements" upperBound="-1"
+        eType="#//detachCSs" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ConnectElenents" upperBound="-1"
+        eType="#//BindElements" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ControlDecisions" upperBound="-1"
+        eType="#//ControlDecisions" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ActionReates" upperBound="-1"
+        eType="#//ExponentialRates" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="AddElements" upperBound="-1"
+        eType="#//AddAElements" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="HSFtypes" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CColActions">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" unique="false" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramsDecl" upperBound="-1"
+        eType="#//formalParameters" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methodBody" upperBound="-1"
+        eType="#//functinality" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="functinality">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
+        eType="#//AElementsBehaviorRoutines" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Actions" eType="#//functinality"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//ExponentialRates"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AddAElements">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="attachCSs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attachParam1" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attachParam2" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="detachCSs">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detachParam1" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detachParam2" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BindElements">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindParam1" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindParam2" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ControlDecisions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionDecl" eType="#//AElementsBehaviorRoutines"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statementDecl1" upperBound="-1"
+        eType="#//AElementsBehaviorRoutines" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionOrDecl" upperBound="-1"
+        eType="#//AElementsBehaviorRoutines" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statementDecl2" upperBound="-1"
+        eType="#//AElementsBehaviorRoutines" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExponentialRates">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="delayValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ExponentialRates" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CConsDecl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Askconstraints" upperBound="-1"
+        eType="#//Askopeator" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Tellconstraints" upperBound="-1"
+        eType="#//Telloperator" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Telloperator">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ConstraintShareDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rate" eType="#//ExponentialRates"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Askopeator">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ConstraintData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rate" eType="#//ExponentialRates"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="traitDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ports" upperBound="-1"
+        eType="#//ProtDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roles" upperBound="-1"
+        eType="#//MedRoleDeclaration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MedDecl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="MedRoles" upperBound="-1"
+        eType="#//MedRoleDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="AActions" upperBound="-1"
+        eType="#//AElementsBehaviorRoutines" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CSConConstraints" upperBound="-1"
+        eType="#//CConsDecl" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="MedCoreBehavior" upperBound="-1"
+        eType="#//StochsticBehaviors" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MedRoleDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="MediationRoles" upperBound="-1"
+        eType="#//DefineMediationRoles" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DefineMediationRoles">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="PubliicIntractionpointare"
+        unique="false" upperBound="-1" eType="#//publicinterfaeceDef"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbsArchDecl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Mediators" upperBound="-1"
+        eType="#//MedDecl" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Constitients" upperBound="-1"
+        eType="#//CSDecl" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="AbstractCoaltion" upperBound="-1"
+        eType="#//AElementsBehaviorRoutines" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="GlobalProps" upperBound="-1"
+        eType="#//GlobalProperties" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GlobalProperties">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="PropertyType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attrinit" eType="#//initVals"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="initVals"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FLOAT" eSuperTypes="#//initVals">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EqualityExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationalExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SumOperation" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MinusOperation" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Term" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="op" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NegationExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableRef" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//FLOAT"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

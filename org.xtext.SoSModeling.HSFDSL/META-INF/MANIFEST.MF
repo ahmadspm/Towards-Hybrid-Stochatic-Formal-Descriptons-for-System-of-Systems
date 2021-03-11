@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.xtext.SoSModeling.HSFDSL
+Bundle-ManifestVersion: 2
+Bundle-Name: org.xtext.SoSModeling.HSFDSL
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: org.xtext.SoSModeling.HSFDSL; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.eclipse.xtend.lib;bundle-version="2.14.0",
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.xtext.SoSModeling.ArchModeling.hSFDSL.impl,
+ org.xtext.SoSModeling.ArchModeling.hSFDSL,
+ org.xtext.SoSModeling.ArchModeling.hSFDSL.util,
+ org.xtext.SoSModeling.ArchModeling.serializer,
+ org.xtext.sosModeling.archModeling.generator,
+ org.xtext.sosModeling.archModeling.scoping,
+ org.xtext.sosModeling.archModeling.services,
+ org.xtext.sosModeling.archModeling,
+ org.xtext.sosModeling.archModeling.hSFDSL,
+ org.xtext.sosModeling.archModeling.hSFDSL.util,
+ org.xtext.sosModeling.archModeling.parser.antlr,
+ org.xtext.sosModeling.archModeling.serializer,
+ org.xtext.sosModeling.archModeling.parser.antlr.internal,
+ org.xtext.sosModeling.archModeling.validation,
+ org.xtext.sosModeling.archModeling.hSFDSL.impl
+Import-Package: org.apache.log4j
